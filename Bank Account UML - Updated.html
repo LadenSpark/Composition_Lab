@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({startOnLoad:true});</script>
+</head>
+<body>
+  <div class="mermaid">
+
+classDiagram
+    direction BT
+
+    class BankAccount {
+        -string accountNumber
+        -string accountHolderName
+        -double accountBalance
+        -vector~Transaction~ transactionHistory
+        +BankAccount()
+        +BankAccount(string accNum, string name, double balance)
+        +BankAccount(BankAccount other)
+        +~BankAccount()
+        +getAccountNumber() string
+        +getAccountHolderName() string
+        +getAccountBalance() double
+        +setAccountHolderName(string name) void
+        +deposit(double amount) bool
+        +withdraw(double amount) bool
+        +printHistory() void
+        +operator=(BankAccount other) BankAccount
+        +operator+=(double amount) BankAccount
+        +operator-=(double amount) BankAccount
+        +operator==(BankAccount other) bool
+        +operator<(BankAccount other) bool
+        +operator>(BankAccount other) bool
+        +printAccount(BankAccount account) void$
+        +createAccountFromInput() BankAccount$
+    }
+
+    class CheckingAccount {
+        -double transactionFee
+        +CheckingAccount()
+        +CheckingAccount(string accNum, string name, double balance, double fee)
+        +~CheckingAccount()
+        +withdraw(double amount) bool
+        +getTransactionFee() double
+        +createCheckingAccountFromInput() CheckingAccount*$
+    }
+
+    class SavingsAccount {
+        -double interestRate
+        +SavingsAccount()
+        +SavingsAccount(string accNum, string name, double balance, double rate)
+        +~SavingsAccount()
+        +withdraw(double amount) bool
+        +calculateInterest() void
+        +getInterestRate() double
+        +createSavingsAccountFromInput() SavingsAccount*$
+    }
+
+    class Transaction {
+        +string type
+        +double amount
+        +string timestamp
+    }
+
+    CheckingAccount --|> BankAccount
+    SavingsAccount --|> BankAccount
+    BankAccount *-- Transaction
+
+  </div>
+</body>
+</html>
